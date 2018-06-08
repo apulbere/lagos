@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+apply plugin: 'java'
+apply plugin: "groovy"
+apply plugin: 'idea'
+
+group 'com.apulbere'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.10
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.6'
+}
