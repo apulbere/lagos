@@ -1,32 +1,39 @@
 package com.apulbere.lagos.collector;
 
-import com.apulbere.lagos.model.Customer;
-import com.apulbere.lagos.model.Group;
+import com.apulbere.lagos.model.Model;
+import com.apulbere.lagos.model.ModelGroup;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import java.util.stream.Collector;
 
 import static java.util.stream.Collectors.collectingAndThen;
 
-public class GroupCollector {
+public class GroupCollector<T> {
+    private Supplier<ModelGroup<T>> groupSupplier;
 
-    public static List<Group> group(List<Customer> customers) {
-        Collector<Customer, Map<Long, Group>, Map<Long, Group>> mapSupplier = Collector.of(
-                HashMap::new,
-                GroupCollector::addToMap,
-                (m1, m2) -> { throw new UnsupportedOperationException(); }
-        );
-        return customers.stream().collect(collectingAndThen(collectingAndThen(mapSupplier, Map::values), ArrayList::new));
+    public GroupCollector(Supplier<ModelGroup<T>> groupSupplier) {
+        this.groupSupplier = groupSupplier;
     }
 
-    private static void addToMap(Map<Long, Group> result, Customer customer) {
-        if (customer.getParentId() == null) {
-            result.computeIfAbsent(customer.getId(), id -> new Group()).setName(customer.getName());
+    public List<ModelGroup<T>> group(List<Model<T>> models) {
+        Collector<Model, Map<T, ModelGroup<T>>, Map<T, ModelGroup<T>>> mapSupplier = Collector.of(
+                HashMap::new,
+                this::addToMap,
+                (m1, m2) -> { throw new UnsupportedOperationException(); }
+        );
+        return models.stream().collect(collectingAndThen(collectingAndThen(mapSupplier, Map::values), ArrayList::new));
+    }
+
+    private void addToMap(Map<T, ModelGroup<T>> result, Model<T> model) {
+        T parentId = model.getParentId();
+        if (parentId == null) {
+            result.computeIfAbsent(model.getId(), id -> groupSupplier.get()).setValue(model);
         } else {
-            result.computeIfAbsent(customer.getParentId(), parentId -> new Group()).getCustomerIds().add(customer.getId());
+            result.computeIfAbsent(parentId, key -> groupSupplier.get()).getChildren().add(model);
         }
     }
 }
