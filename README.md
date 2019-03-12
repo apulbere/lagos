@@ -1,5 +1,9 @@
 ## A collection of Java 8+ samples
 
-* [group customers by parent id](/src/test/groovy/com/apulbere/lagos/collector/GroupCollectorSpec.groovy)
-* [validate object in depth using functions](/src/test/groovy/com/apulbere/lagos/validator/ValidatorSpec.groovy)
-* [piped input/output stream](/src/test/groovy/com/apulbere/lagos/pipedstream/InputStreamForkSpec)
+* collector
+    * [group customers by parent id](/src/main/java/com/apulbere/lagos/collector/GroupCollector.java)
+    * [partition list with custom collector](/src/main/java/com/apulbere/lagos/collector/ChunkCollector.java)
+* function
+    * [validate object in depth using functions](/src/main/java/com/apulbere/lagos/validator/Validator.java)
+* other
+    * [piped input/output stream](/src/main/java/com/apulbere/lagos/pipedstream/ForkInputStream.java)
