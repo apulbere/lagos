@@ -5,5 +5,10 @@
     * [partition list with custom collector](/src/main/java/com/apulbere/lagos/collector/ChunkCollector.java)
 * function
     * [validate object in depth using functions](/src/main/java/com/apulbere/lagos/validator/Validator.java)
+* stream
+    * [iterate a list recursively with stream](/src/main/java/com/apulbere/lagos/stream/RecursiveStream.java)
 * other
     * [piped input/output stream](/src/main/java/com/apulbere/lagos/pipedstream/ForkInputStream.java)
+    
+#### Prerequisites
+* Java 12
