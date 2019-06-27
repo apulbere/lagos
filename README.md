@@ -9,6 +9,7 @@
     * [iterate a list recursively with stream](/src/main/java/com/apulbere/lagos/stream/RecursiveStream.java)
 * other
     * [piped input/output stream](/src/main/java/com/apulbere/lagos/pipedstream/ForkInputStream.java)
+    * [call POJO's setters at any level without causing NPE](/src/main/java/com/apulbere/lagos/SafeChainingConsumer.java)
     
 #### Prerequisites
 * Java 12
