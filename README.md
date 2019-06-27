@@ -10,6 +10,7 @@
 * other
     * [piped input/output stream](/src/main/java/com/apulbere/lagos/pipedstream/ForkInputStream.java)
     * [call POJO's setters at any level without causing NPE](/src/main/java/com/apulbere/lagos/SafeChainingConsumer.java)
+    * [generic method for adding numbers together](/src/main/java/com/apulbere/lagos/Adder.java)
     
 #### Prerequisites
 * Java 12
